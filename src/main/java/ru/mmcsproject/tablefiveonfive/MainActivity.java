@@ -1,9 +1,10 @@
 package ru.mmcsproject.tablefiveonfive;
 
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         mButton = findViewById(R.id.button26);
         mTextView = findViewById(R.id.textView);
@@ -63,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mTextView.setVisibility(View.VISIBLE);
         mChronometer.setVisibility(View.VISIBLE);
 
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        ArrayList<Integer> list = new ArrayList<>();
         for (int i = 1; i < 26; i++) {
             list.add(new Integer(i));
         }
@@ -89,16 +92,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (i==26) {
             mChronometer.stop();
-            long elepsedTimeMills = System.currentTimeMillis() - StartTime;
-            final long sec = elepsedTimeMills / 1000;
+            long elapsedTimeMills = System.currentTimeMillis() - StartTime;
+            final long sec = elapsedTimeMills / 1000;
             final int min = (int)(sec % 3600)/60;
             final int seconds = (int)sec % 60;
             mTextView.setText(String.format("Игра окончена! \n Ваше время: %02d:%02d", min, seconds));
             mChronometer.setVisibility(View.INVISIBLE);
             i++;
         }
-
     }
-
-
 }
